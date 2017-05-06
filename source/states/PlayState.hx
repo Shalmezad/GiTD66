@@ -1,5 +1,6 @@
 package states;
 
+import sprites.Enemy;
 import flixel.math.FlxRandom;
 import flixel.math.FlxPoint;
 import flixel.group.FlxGroup;
@@ -19,6 +20,7 @@ class PlayState extends FlxState
 	var _score:Int;
 
 	var _walls:FlxGroup;
+	var _enemies:FlxGroup;
 
 	override public function create():Void
 	{
@@ -27,9 +29,11 @@ class PlayState extends FlxState
 		_player = new Player(FlxG.width/2, FlxG.height/2);
 		_pickup = new Pickup(randomPointInScreen());
 		_walls = new FlxGroup();
+		_enemies = new FlxGroup();
 
 		add(_pickup);
 		add(_player);
+		add(_enemies);
 		addWalls();
 	}
 
@@ -60,6 +64,7 @@ class PlayState extends FlxState
 		super.update(elapsed);
 		FlxG.overlap(_player, _pickup, playerPickupOverlap);
 		FlxG.collide(_player, _walls);
+		FlxG.collide(_enemies, _walls);
 	}
 
 	private function playerPickupOverlap(pl:Player, pi:Pickup)
@@ -70,6 +75,9 @@ class PlayState extends FlxState
 		var newPoint:FlxPoint = randomPointInScreen();
 		_pickup.reset(newPoint.x,newPoint.y);
 		// Add an enemy;
+		newPoint = randomPointInScreen();
+		var enemy:Enemy = new Enemy(newPoint);
+		_enemies.add(enemy);
 	}
 
 	public static function randomPointInScreen():FlxPoint
