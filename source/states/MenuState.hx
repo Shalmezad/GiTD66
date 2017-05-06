@@ -25,6 +25,7 @@ class MenuState extends FlxState
 		_btnStart = new FlxButton(btnX, FlxG.height/2, "Start Playing", startCallback);
 		_btnInstructions = new FlxButton(btnX, FlxG.height/2+60, "How to Play", instructionCallback);
 
+
 		add(titleText);
 		add(_btnStart);
 		add(_btnInstructions);

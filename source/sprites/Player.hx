@@ -1,12 +1,13 @@
 package sprites;
+import flixel.FlxG;
 import flixel.FlxSprite;
 
 class Player extends FlxSprite
 {
 	private var NORMAL_SPEED=120;
-	public function new()
+	public function new(x:Float, y:Float)
 	{
-		super();
+		super(x,y);
 		makeGraphic(20,20,0xFFFFFFFF);
 	}
 
